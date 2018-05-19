@@ -9,34 +9,13 @@ public class TreeLevelOrder {
         TreeNode (int v) { this.v = v;}
     }
 
-    public static void printByLevel (TreeNode root) { 
+    public static void printByLevelIterative (TreeNode root) { 
 
-        TreeNode tmp = root;
+       
+    }
 
-        Queue <TreeNode>q= new LinkedList<>(); 
-        q.add(tmp);
-
-        while (true) {
-            int nodeCounter = q.size(); 
-            if (nodeCounter == 0) {
-                break;
-            }
-
-            while (nodeCounter > 0) {
-                TreeNode node = q.peek();
-                System.out.print(node.v + " " );
-                q.remove(); 
-                if (node.l != null) {
-                    q.add(node.l);
-                }
-                if (node.r != null) {
-                    q.add(node.r);
-                }
-                nodeCounter--;
-
-            }
-            System.out.println();
-        }
+    public static void printByLevelRecursive (TreeNode root) {
+        
     }
 
     public static void main (String []args) {
