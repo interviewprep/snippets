@@ -51,8 +51,39 @@ public class FindNumberClosest {
 
     public static int findClosestNumber (TreeNode root, int t) {
         TreeNode tmp = root; 
-`
-        return -1; 
+        if (tmp == null) return Integer.MIN_VALUE; 
+
+        int min = Math.abs(root.v - t); 
+        TreeNode minNode = tmp; 
+        
+        while (tmp != null) { 
+            
+            if (min == 0 || min == 1){
+                break;
+            }
+            int diff_l =Integer.MIN_VALUE;
+            int diff_r =Integer.MIN_VALUE;
+            if (tmp.l !=null) {
+                diff_l = Math.abs(tmp.l.v-t);                
+            }
+            if (tmp.r != null) {
+                diff_r = Math.abs(tmp.r.v-t);
+            }
+            if (diff_l < diff_r) {
+                if (min > diff_l) {
+                    min = diff_l;
+                    minNode = tmp.l;
+                    tmp = tmp.l;
+                }
+            }else {
+                if (min > diff_r) {
+                    min = diff_r; 
+                    minNode = tmp.r; 
+                    tmp = tmp.r;
+                }
+            }            
+        }
+        return minNode.v; 
     }
 
     public static void main (String args[]){ 
@@ -62,7 +93,7 @@ public class FindNumberClosest {
         /**
          *                            40
          *                     23            55
-         *                 21      28    38     78   
+         *                 12      28    38     78   
          */
         parseTree(root);
 
@@ -76,7 +107,7 @@ public class FindNumberClosest {
 
         System.out.println ();
         System.out.println ();
-        System.out.println ("findClosestNumber(23): " + findClosestNumber(root, 24)); // expects 23
+        System.out.println ("findClosestNumber(24): " + findClosestNumber(root, 24)); // expects 23
         System.out.println ("findClosestNumber(51): " + findClosestNumber(root, 55)); // expects 55
         System.out.println ("findClosestNumber(41): " + findClosestNumber(root, 40)); // expects 40
     }
