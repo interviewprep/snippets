@@ -29,10 +29,11 @@ public class MoveZeroesToLeftOnesTwosToRight {
             swap(left,right,arr);      
 
         }
-
+ 
         // [let ... length-1] contains 1,2
         right = l-1;
 
+        // you want to use variables instead of hard-coding the numbers, and re-use the same function.
         while (left<right) {
             if (arr[left] == 1){
                 left++;
