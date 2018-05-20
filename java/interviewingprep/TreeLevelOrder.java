@@ -9,26 +9,53 @@ public class TreeLevelOrder {
         TreeNode (int v) { this.v = v;}
     }
 
-    public static void printByLevelIterative (TreeNode root) { 
+   
+    public static TreeNode marker = new TreeNode(-999);
 
-       
-    }
+    public static void printByLevelQ (TreeNode root) {
 
-    public static void printByLevelRecursive (TreeNode root) {
+        Queue <TreeNode>q = new ArrayDeque<>();
         
+        TreeNode cur = root; 
+        q.add(cur);
+        q.add(marker);
+
+        while (!q.isEmpty()) {
+            cur = q.remove(); 
+
+            //System.out.println ("cur.v + :" +cur.v);
+            if (cur.v != -999) {
+                System.out.print (" " + cur.v);
+                if (cur.l != null) { 
+                    q.add (cur.l); 
+                }
+                if (cur.r != null) {
+                    q.add (cur.r); 
+                }
+            }else{
+                System.out.println();                
+                q.add(new TreeNode(-999));
+                
+                if (q.size() == 1) break;    
+            }
+            
+           
+        }
+        System.out.println();
     }
 
     public static void main (String []args) {
-        TreeNode root = null;
+        TreeNode root = null;                                                                                                
         root = buildTree (root);
         /**
          *                            40
          *                     23            55
-         *                 21      28    38     78   
+         *                 12      28    38     70   
          */
-        parseTree(root);   
-        System.out.println ("\n\n\n=====================\n\n");
-        printByLevel(root);
+        //parseTreeInOrder(root);   
+        //parseTreePreOrder(root);
+        System.out.println ("\n\n\n========PRINT BY LEVEL=============\n\n");
+        printByLevelQ(root);
     }
 
 
@@ -40,13 +67,26 @@ public class TreeLevelOrder {
     
         return root;
     }
-    
-    public static void parseTree (TreeNode root) { 
+
+
+    // RootLeftRight
+    public static void parseTreePreOrder (TreeNode root) { 
+        
+        if (root == null) return;
+        System.out.println (root.v);
+        parseTreePreOrder(root.l);
+        parseTreePreOrder(root.r);
+
+    }
+
+
+    //LeftRootRight
+    public static void parseTreeInOrder (TreeNode root) { 
         if (root == null) return;
     
-            parseTree(root.l);
+            parseTreeInOrder(root.l);
             System.out.print (" " + root.v +" ");
-            parseTree(root.r);
+            parseTreeInOrder(root.r);
     }
     
     
